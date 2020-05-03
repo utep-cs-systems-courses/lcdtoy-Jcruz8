@@ -1,0 +1,23 @@
+#include <msp430.h>
+#include "led.h"
+#include "switches.h"
+#include "buzzer.h"
+#include "../timerLib/libTimer.h"
+#include "lcddraw.h"
+#include "lcdutils.h"
+
+int main(){
+  configureClocks();
+  buzzer_init();
+  switch_init();
+  led_init();
+
+  clearScreen(COLOR_BLUE);
+  for (int i = 0; i <= 10; i++){
+    for (int j = 0; j <= 10-i; i++){
+      drawPixel(20+j, 20 - i, BLACK);
+    }
+  }
+  
+  or_sr(0x18);
+}
