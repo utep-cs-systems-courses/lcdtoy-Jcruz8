@@ -23,7 +23,7 @@ switch_init()			/* setup switch */
   P2OUT |= SWITCHES;		/* pull-ups for switches */
   P2DIR &= ~SWITCHES;		/* set switches' bits for input */
   switch_update_interrupt_sense();
-  //led_update();
+  led_update();
   switch_interrupt_handler();
 }
 
@@ -39,6 +39,7 @@ switch_interrupt_handler()
   if(switch_state_down1){
     // state1_lights();
     currentState = 1;
+    playMusic();
   }
   else if(switch_state_down2){
     // state2_sounds();
@@ -46,6 +47,10 @@ switch_interrupt_handler()
   }
   else if(switch_state_down3){
     currentState = 3;
+  }
+  else if(switch_state_down4){
+    currentState = 4;
+    playMusic();
   }
   state_advance();
 }
