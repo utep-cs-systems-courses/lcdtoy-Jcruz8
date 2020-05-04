@@ -16,7 +16,8 @@ char state1_lights(){
 }
 
 char state2_sounds(){
-  buzzer_set_period(1000);
+  playMusic();
+  //buzzer_set_period(1000);
 }
 
 char state3_drawShape(int c, int r){
@@ -27,8 +28,13 @@ char state3_drawShape(int c, int r){
       drawPixel(c-j, r+i, BLACK);
     }
   }
-  col++;
-  row++;
+  col += 2;
+  row += 2;
+  if(col == 100 || row == 100){
+    col = 0;
+    row = 0;
+  }
+  state3_drawShape(col, row);
 }
 
 void state_advance(){
@@ -37,8 +43,8 @@ void state_advance(){
   switch(currentState){
   case 1: changed = state1_lights(); break;
   case 2: changed = state2_sounds(); break;
-  case 3: changed = WDT(); break;
-    // case 3: changed = state3_drawShape(col, row); break;
+  case 3: changed = state3_drawShape(col, row); break;
+    //  case 3: changed = WDT(); break;
     //case 4: changed = state4_StopStates(); break;
   default: break;
   }
