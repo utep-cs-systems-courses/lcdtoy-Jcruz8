@@ -7,13 +7,13 @@ void
 __interrupt_vec(WDT_VECTOR) WDT(){
   static char blink_count = 0;
   P1OUT |= LED_GREEN;
-  while(currentState == 3){
-    if(++blink_count == 125){
+   while(currentState == 3){
+     if(++blink_count == 125){
     state3_drawShape(col,row);
     }
-  }
-  // if(++blink_count == 125){
-   state_advance();
+   }
+   // if(++blink_count == 125){
+    state_advance();
     blink_count = 0;
     // }
   P1OUT &= ~LED_GREEN;

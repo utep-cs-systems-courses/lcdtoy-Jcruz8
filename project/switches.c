@@ -23,7 +23,8 @@ switch_init()			/* setup switch */
   P2OUT |= SWITCHES;		/* pull-ups for switches */
   P2DIR &= ~SWITCHES;		/* set switches' bits for input */
   switch_update_interrupt_sense();
-  led_update();
+  //led_update();
+  switch_interrupt_handler();
 }
 
 void
